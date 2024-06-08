@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 final darkTheme = ThemeData(
   scaffoldBackgroundColor: const Color.fromARGB(255, 26, 26, 26),
   dividerColor: Colors.white24,
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.yellow),
   appBarTheme: const AppBarTheme(
     surfaceTintColor: Colors.transparent,
     backgroundColor: Color.fromARGB(255, 26, 26, 26),
