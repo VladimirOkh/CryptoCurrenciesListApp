@@ -1,7 +1,9 @@
 import 'package:crypto_currencies_list_app/features/crypto_list/widgets/widgets.dart';
-import 'package:crypto_currencies_list_app/repositories/crypto_coins/crypto_coins_repository.dart';
-import 'package:crypto_currencies_list_app/repositories/models/crypto_coin.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../../repositories/crypto_coins/crypto_coins.dart';
 
 class CryptoListScreen extends StatefulWidget {
   const CryptoListScreen({super.key});
@@ -25,17 +27,17 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
       appBar: AppBar(
         title: const Text('CryptoCurrenciesList'),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
+          preferredSize: const Size.fromHeight(5.0),
           child: Container(
-            color: Colors.grey, // Цвет разделителя
-            height: 1.0,
+            height: 2.0,
           ),
         ),
       ),
       body: (_cryptoCoinsList == null)
           ? const Center(
               child: CircularProgressIndicator(
-                  ))
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
+            ))
           : ListView.separated(
               itemCount: _cryptoCoinsList!.length,
               separatorBuilder: (context, index) => const Divider(),
@@ -48,7 +50,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
   }
 
   Future<void> _loadCryptoCoins() async {
-    _cryptoCoinsList = await CryptoCoinsRepository().getCoinsList();
+    _cryptoCoinsList = await GetIt.I<AbstractCoinsRepository>().getCoinsList();
     setState(() {});
   }
 }
